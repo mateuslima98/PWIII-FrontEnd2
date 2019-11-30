@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Ocorrencia } from '../ocorrencia';
+import { OcorrenciaAPIService } from '../service/ocorrencia-api.service';
 
 @Component({
   selector: 'has-lista-ocorrencia',
@@ -6,10 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./lista-ocorrencia.component.css']
 })
 export class ListaOcorrenciaComponent implements OnInit {
+  Ocorrencias : Ocorrencia[];
 
-  constructor() { }
-
+  constructor(private service: OcorrenciaAPIService) { }
   ngOnInit() {
-  }
+    this.service
+    .getClientes()
+    .subscribe((data: Ocorrencia[]) => this.Ocorrencias = data,
+    error => console.log(error));
+    }
 
 }
